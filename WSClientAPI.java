@@ -29,10 +29,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
 
 public class WSClientAPI
 {
+
+	String url_prefix = "http://1fee38b1.ngrok.io/";
+
 	/********************************************************************************
 	* Description: Gets and returns all the pending orders in the orderinfo database
 	* Parameters: None
@@ -43,7 +45,7 @@ public class WSClientAPI
 	{
 		// Set up the URL and connect to the node server
 
-		String url = "http://localhost:3000/api/pending";
+		String url = url_prefix + "api/pending";
 
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -81,7 +83,7 @@ public class WSClientAPI
 	public String retrievePendingOrders(Integer id) throws Exception
 	{
 		// Set up the URL and connect to the node server
-		String url = "http://localhost:3000/api/pending/"+id.toString();
+		String url = url_prefix + "api/pending/"+id.toString();
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -117,7 +119,7 @@ public class WSClientAPI
 	public String retrievePendingOrders(String customer) throws Exception
 	{
 		// Set up the URL and connect to the node server
-		String url = "http://localhost:3000/api/pendingcustorders/"+customer;
+		String url = url_prefix + "api/pendingcustorders/"+customer;
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -154,7 +156,7 @@ public class WSClientAPI
 	{
 		// Set up the URL and connect to the node server
 
-		String url = "http://localhost:3000/api/filled";
+		String url = url_prefix + "api/filled";
 
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -191,7 +193,7 @@ public class WSClientAPI
 	public String retrieveFilledOrders(String customer) throws Exception
 	{
 		// Set up the URL and connect to the node server
-		String url = "http://localhost:3000/api/filledcustorders/"+customer;
+		String url = url_prefix + "api/filledcustorders/"+customer;
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -224,14 +226,14 @@ public class WSClientAPI
 	* Returns: String that contains the status of the POST operation
 	********************************************************************************/
 
-   	public String newOrder(String customer, String[] products, HashMap productQtys) throws Exception
+   	public String newOrder(String customer, String red, String blue, String green, String yellow, String black, String white) throws Exception
 	{
-		// Set up the URL and connect to the node server		
-		URL url = new URL("http://localhost:3000/api/neworder");
+		// Set up the URL and connect to the node server
+		URL url = new URL(url_prefix + "api/neworder");
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 		// The POST parameters
-		//String input = "&customer="+customer+"&red="+red+"&blue="+blue+"&green="+green+"&yellow="+yellow+"&black="+black+"&white="+white;
+		String input = "&customer="+customer+"&red="+red+"&blue="+blue+"&green="+green+"&yellow="+yellow+"&black="+black+"&white="+white;
 
 		//Configure the POST connection for the parameters
 		conn.setRequestMethod("POST");
@@ -278,7 +280,7 @@ public class WSClientAPI
     public String markOrderFilled(Integer id) throws Exception
 	{
 		// Set up the URL and connect to the node server
-		String url = "http://localhost:3000/api/markOrderFilled/"+id.toString();
+		String url = url_prefix + "api/markOrderFilled/"+id.toString();
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
@@ -313,7 +315,7 @@ public class WSClientAPI
 	public String deleteOrder(Integer id) throws Exception
 	{
 		// Set up the URL and connect to the node server
-		String url = "http://localhost:3000/api/deleteOrder/"+id.toString();
+		String url = url_prefix + "api/deleteOrder/"+id.toString();
 		URL obj = new URL(url);
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 

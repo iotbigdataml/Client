@@ -22,7 +22,6 @@ import java.util.Scanner;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.Console;
-import java.util.HashMap;
 
 public class OrdersUI
 {
@@ -201,43 +200,33 @@ public class OrdersUI
 				
 				// Square products.
 
-				HashMap productQtys = new HashMap();
-
-				productQtys.put("red", GetOrderCount( "red squares" ));
-				productQtys.put("blue", GetOrderCount( "blue squares" ));
-				productQtys.put("green", GetOrderCount( "green squares" ));
-				productQtys.put("yellow", GetOrderCount( "yellow squares" ));
-				productQtys.put("black", GetOrderCount( "black squares" ));
-				productQtys.put("white", GetOrderCount( "white squares" ));
+				red 	= GetOrderCount( "red squares" );
+				blue 	= GetOrderCount( "blue squares" );
+				green	= GetOrderCount( "green squares" );
+				yellow 	= GetOrderCount( "yellow squares" );
+				black   = GetOrderCount( "black squares" );
+				white 	= GetOrderCount( "white squares" );
 
 				System.out.println("Creating the following order:");
 				System.out.println("==============================");
-				System.out.println(" Customer ID:" 	+ customer);
-				System.out.println(" red square(s):" 	+ productQtys.get("red"));
-				System.out.println(" blue square(s)" 	+ productQtys.get("blue"));
-				System.out.println(" green square(s):" 	+ productQtys.get("green"));
-				System.out.println(" yellow square(s)" 	+ productQtys.get("yellow"));
-				System.out.println(" black square(s):" 	+ productQtys.get("black"));
-				System.out.println(" white square(s)" 	+ productQtys.get("white"));
+				System.out.println(" Customer name:" 	+ customer);
+				System.out.println(" red square(s):" 	+ red);
+				System.out.println(" blue square(s)" 	+ blue);
+				System.out.println(" green square(s):" 	+ green);
+				System.out.println(" yellow square(s)" 	+ yellow);
+				System.out.println(" black square(s):" 	+ black);
+				System.out.println(" white square(s)" 	+ white);
 				System.out.println("==============================");					
 				System.out.println("\nPress 'y' to create this order:");
 
 				option = keyboard.next().charAt(0);
-                                
-				String[] products = new String[]{"red", "blue", "green", "yellow", "black", "white"};
-				for (int i=0; i<products.length; i++) {
-					if (Integer.valueOf((String)productQtys.get(products[i]))==0) {
-						productQtys.remove(products[i]);
-					}
-				}
 
 				if (( option == 'y') || (option == 'Y'))
-
 				{
 					try
 					{
 						System.out.println("\nCreating order...");
-						response = api.newOrder(customer, products, productQtys);
+						response = api.newOrder(customer, red, blue, green, yellow, black, white);
 
 					} catch(Exception e) {
 
